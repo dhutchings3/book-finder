@@ -1,29 +1,52 @@
-import React, {Component} from 'react';
-import BookSearch from '.src/BookList';
-import BookFilters from '.src/BookFilters';
+import React, { Component } from 'react';
+import BookItem from './BookItem.js';
+import './BookSearch.css';
 
 class BookList extends Component {
-    render () {
-        return (
-            <ul>
-            <li>
-              <h2>Book 1</h2>
-              <h3>Author:</h3>
-              <h3>About</h3>
-            </li>
-            <li>
-              <h2>Book 2</h2>
-              <h3>Author:</h3>
-              <h3>About</h3>
-            </li>
-            <li>
-              <h2>Book 3</h2>
-              <h3>Author:</h3>
-              <h3>About</h3>
-            </li>
-          </ul>
-        );
+  onChange(event) {
+    let filteredBooks;
+    const selectPrintType = event.target.value;
+    if (event.target.value === "Default") {
+      filteredBooks = this.props.books;
+    } else {
+      filteredBooks = this.props.books.filter(item => item.saleInfo.isEbook === selectPrintType);
     }
-}
+    this.props.filter(filteredBooks); 
+  } 
 
+  render() {
+    const bookItems = this.props.filtered.map((book, index) => {
+      return <li key={index}> <BookItem info={book.volumeInfo} /> </li>
+    });
+
+    return (
+      <div className="filterSection">
+        <form className="eBook">
+        <label htmlFor="filter">Print Type:</label>
+          <select 
+            id="printType"
+            onChange= {e => this.onChange(e)}>
+            <option value="Default">All</option>
+            <option value={true}>eBooks</option>
+            <option value={false}>Non-eBooks</option>
+          </select>
+        </form> 
+        <form className="eBook">
+        <label htmlFor="filter">Book Type:</label>
+          <select 
+            id="bookType"
+            onChange= {e => this.onChange(e)}>
+            <option value="Default">All</option>
+            <option value="FREE">Free</option>
+            <option value="NOT_FOR_SALE">Not For Sale</option>
+          </select>
+        </form>     
+        <ul className="bookList">
+          {bookItems}
+        </ul>
+        
+      </div>
+    );
+  }
+}
 export default BookList;
