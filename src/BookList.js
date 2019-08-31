@@ -14,6 +14,18 @@ class BookList extends Component {
     this.props.filter(filteredBooks); 
   } 
 
+  onChange(event) {
+    let secondFilter;
+    const selectBookType = event.target.value;
+    if (event.target.value === "Default") {
+      secondFilter = this.props.books
+    } else {
+      secondFilter = this.props.books.filter(item => item.saleInfo.saleability === selectBookType);
+    }
+    this.props.filter(secondFilter); 
+  } 
+
+
   render() {
     const bookItems = this.props.filtered.map((book, index) => {
       return <li key={index}> <BookItem info={book.volumeInfo} /> </li>
