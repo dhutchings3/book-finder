@@ -1,0 +1,21 @@
+.eBook {
+    height: 35px;
+    padding-top: 10px;
+    display: inline-block;
+    padding-right: 20px;
+}
+
+.filterSection {
+    background: lightgray;
+    text-align: center;
+}
+
+#bookType {
+    width: 200px;
+}
+
+.bookList {
+    background: white;
+    list-style: none;
+    padding-top: 20px;
+}

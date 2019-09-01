@@ -1,0 +1,16 @@
+
+.bookItem p {
+    text-align: left;
+    height: 200px;
+    border-bottom: 1px lightgray solid;
+}
+
+.bookItem h4 h3 {
+    text-align: center;
+}
+
+.bookItem img {
+    float: left;
+    margin-top: 20px;
+    padding-right: 30px;
+}
