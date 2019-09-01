@@ -3,16 +3,20 @@ import BookItem from './BookItem.js';
 import './BookSearch.css';
 
 class BookList extends Component {
-  handleUpdate(event) {
+  updateString (event) {
     let filteredBooks;
-    const selectPrintType = event.target.value;
-    if (event.target.value === "Default") {
-      filteredBooks = this.props.books;
-    } else {
+    //const selectPrintType = event.target.value;
+    if (event.target.value === 'true') {
+      let selectPrintType = (event.target.value === 'true')
       filteredBooks = this.props.books.filter(item => item.saleInfo.isEbook === selectPrintType);
+    } else if (event.target.value === 'false') {
+      let selectPrintType = (event.target.value === 'true')
+      filteredBooks = this.props.books.filter(item => item.saleInfo.isEbook === selectPrintType);
+    } else {
+      filteredBooks = this.props.books;
     }
     this.props.filter(filteredBooks); 
-  } 
+  }
 
   handleChange(event) {
     let secondFilter;
@@ -37,10 +41,10 @@ class BookList extends Component {
         <label htmlFor="filter">Print Type:</label>
           <select 
             id="printType"
-            onChange= {e => this.handleUpdate(e)}>
+            onChange= {e => this.updateString(e)}>
             <option value="Default">All</option>
-            <option value="true">eBooks</option>
-            <option value="false">Non-eBooks</option>
+            <option value={true}>eBooks</option>
+            <option value={false}>Non-eBooks</option>
           </select>
         </form> 
         <form className="eBook">
